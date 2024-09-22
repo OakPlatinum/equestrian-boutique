@@ -16,15 +16,20 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven { name 'Modrinth'; url 'https://api.modrinth.com/maven' }
+
+	maven { name 'mod-menu'; url 'https://maven.terraformersmc.com/' }
+
+	maven { name 'minelp-snapshot'; url 'https://repo.minelittlepony-mod.com/maven/snapshot' }
+	maven { name 'minelp-releases'; url 'https://repo.minelittlepony-mod.com/maven/release' }
 }
 
 loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		"modid" {
+		"equestrian_boutique" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
 		}
 	}
 
@@ -38,6 +43,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modApi "com.minelittlepony:minelittlepony:${project.minelp_version}"
+
+	modApi "maven.modrinth:armourers-workshop:${project.armourers_workshop_version}", { exclude group: "net.fabricmc.fabric-api" }
 	
 }
 
